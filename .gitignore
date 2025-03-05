@@ -1,5 +1,30 @@
-# Dependency directories
+# Exclude everything except CLI-related files
+/*
+
+# Include CLI-related files and directories
+!.gitignore
+!package.json
+!package-lock.json
+!tsconfig.json
+!README.md
+!src/
+!dist/
+
+# Exclude node_modules and other unnecessary files
 node_modules/
+.env*
+*.sqlite
+*.log
+.DS_Store
+Thumbs.db
+
+# Exclude studio and other non-CLI directories
+code-lit-studio/
+code-lit/
+test-project/
+demo-api/
+
+# Dependency directories
 .npm
 jspm_packages/
 
@@ -12,6 +37,8 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
+*/**/.env
+*/**/.env.*
 
 # Debug logs
 npm-debug.log*
@@ -32,3 +59,10 @@ Thumbs.db
 
 # SQLite database files
 *.sqlite 
+
+# Potential API keys and secrets
+**/apikey*
+**/api_key*
+**/credentials*
+**/*secrets*
+**/.env* 
