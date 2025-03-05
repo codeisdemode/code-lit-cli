@@ -1,0 +1,230 @@
+// frontend/src/components/BackupManager.tsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Notification from './Notification';
+
+interface BackupManagerProps {
+  projectId: string;
+  filename: string;
+}
+
+const BackupManager: React.FC<BackupManagerProps> = ({ projectId, filename }) => {
+  const [backups, setBackups] = useState<string[]>([]);
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
+
+  useEffect(() => {
+    fetchBackups();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId, filename]);
+
+  async function fetchBackups() {
+    try {
+      console.log(`GET -> http://localhost:3001/api/${projectId}/file/backups?filename=${filename}`);
+      const res = await axios.get(`http://localhost:3001/api/${projectId}/file/backups`, {
+        params: { filename },
+      });
+      setBackups(res.data.backups);
+      setError('');
+      console.log('Backups received:', res.data.backups);
+    } catch (err: any) {
+      console.error('Error fetching backups:', err);
+      setError('Failed to fetch backups.');
+    }
+  }
+
+  async function restoreBackup(backupName: string) {
+    try {
+      console.log(`POST -> http://localhost:3001/api/${projectId}/file/restore`);
+      await axios.post(`http://localhost:3001/api/${projectId}/file/restore`, {
+        filename,
+        backupName,
+      });
+      setSuccess(`Backup ${backupName} restored successfully.`);
+      setError('');
+      fetchBackups();
+    } catch (err: any) {
+      console.error('Error restoring backup:', err);
+      setError(`Failed to restore backup ${backupName}.`);
+      setSuccess('');
+    }
+  }
+
+  async function deleteBackup(backupName: string) {
+    try {
+      console.log(`DELETE -> http://localhost:3001/api/${projectId}/file/backups`);
+      await axios.delete(`http://localhost:3001/api/${projectId}/file/backups`, {
+        data: { filename, backupName },
+      });
+      setSuccess(`Backup ${backupName} deleted successfully.`);
+      setError('');
+      fetchBackups();
+    } catch (err: any) {
+      console.error('Error deleting backup:', err);
+      setError(`Failed to delete backup ${backupName}.`);
+      setSuccess('');
+    }
+  }
+
+  return (
+    <div className="backup-manager">
+      <h4>Backups</h4>
+      {error && <Notification message={error} type="error" />}
+      {success && <Notification message={success} type="success" />}
+      {backups.length === 0 ? (
+        <p>No backups available.</p>
+      ) : (
+        <ul>
+          {backups.map((backup) => (
+            <li key={backup}>
+              {backup}
+              <div>
+                <button onClick={() => restoreBackup(backup)}>Restore</button>
+                <button onClick={() => deleteBackup(backup)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default BackupManager;
+/* frontend/src/components/Chat.css */
+
+.chat-message {
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  max-width: 80%;
+}
+
+.chat-message.user {
+  background-color: #1abc9c;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-message.assistant {
+  background-color: #34495e;
+  color: white;
+  align-self: flex-start;
+}
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chat-input button {
+  padding: 0.5rem 1rem;
+  background-color: #1abc9c;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.chat-input button:hover {
+  background-color: #16a085;
+}
+// frontend/src/components/Chat.tsx
+import React, { useRef, useEffect } from 'react';
+
+interface ChatProps {
+  chatLog: string[];
+  chatInput: string;
+  setChatInput: (input: string) => void;
+  sendChatMessage: () => void;
+}
+
+const Chat: React.FC<ChatProps> = ({ chatLog, chatInput, setChatInput, sendChatMessage }) => {
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatLog]);
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendChatMessage();
+    }
+  };
+
+  return (
+    <div className="chat">
+      <h2>Chat</h2>
+      <div className="chat-log">
+        {chatLog.map((msg, index) => (
+          <div key={index} className="chat-message">
+            {msg}
+          </div>
+        ))}
+        <div ref={chatEndRef} />
+      </div>
+      <div className="chat-input">
+        <textarea
+          value={chatInput}
+          onChange={(e) => setChatInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="Type your message here..."
+        />
+        <button onClick={sendChatMessage}>Send</button>
+      </div>
+    </div>
+  );
+};
+
+export default Chat;
+/* frontend/src/components/Notification.css */
+
+.notification {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.notification.error {
+  background-color: #e74c3c;
+}
+
+.notification.success {
+  background-color: #2ecc71;
+}
+// frontend/src/components/Notification.tsx
+import React from 'react';
+
+interface NotificationProps {
+  message: string;
+  type: 'success' | 'error';
+  onClose?: () => void;
+}
+
+const Notification: React.FC<NotificationProps> = ({ message, type, onClose }) => {
+  return (
+    <div className={`notification ${type}`}>
+      <span>{message}</span>
+      {onClose && <button onClick={onClose}>X</button>}
+    </div>
+  );
+};
+
+export default Notification;

@@ -1,0 +1,559 @@
+/* frontend/src/app.css */
+
+/* App Container */
+.app-container { 
+  display: grid;
+  grid-template-columns: 200px 1fr 400px;
+  grid-template-rows: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+}
+
+/* Sidebar for file list */
+.sidebar {
+  background-color: transparent; /* Fully transparent */
+  color: #ffffff; /* White text */
+  padding: 1rem;
+  overflow-y: auto;
+  /* Removed border */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow on the right */
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  color: #39FF14; /* Neon Green for headings */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  padding: 0.5rem;
+  cursor: pointer;
+  /* Removed border */
+  transition: background-color 0.3s ease;
+}
+
+.sidebar li:hover {
+  background-color: rgba(57, 255, 20, 0.1); /* Neon Green tint on hover */
+}
+
+.sidebar li.active-file {
+  background-color: rgba(255, 95, 31, 0.2); /* Neon Orange active background */
+  /* Removed border */
+}
+
+/* Center panel for preview */
+/* Left unchanged as per request */
+.preview-panel {
+  background-color: transparent; /* Fully transparent */
+  overflow: hidden;
+  /* No additional styling to allow website template to show */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle inner shadow for depth */
+}
+
+/* Right panel for editor + chat */
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent; /* Fully transparent */
+  color: #ffffff; /* White text */
+  overflow: hidden;
+  /* Removed border */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow on the left */
+}
+
+/* Editor Section */
+.editor {
+  padding: 1rem;
+  height: 50%;
+  overflow-y: auto;
+  background-color: transparent; /* Fully transparent */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow at the bottom */
+}
+
+.editor h3 {
+  margin-top: 0;
+  color: #39FF14; /* Neon Green for headings */
+}
+
+.editor button {
+  /* Already styled globally in index.css */
+  /* Additional styles if needed */
+}
+
+.editor button:hover {
+  background-color: rgba(57, 255, 20, 0.1); /* Subtle Neon Green tint on hover */
+}
+
+/* Chat Section */
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: transparent; /* Fully transparent */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow at the top */
+}
+
+.chat-log {
+  flex: 1;
+  background-color: transparent; /* Fully transparent */
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  color: #ffffff; /* White text */
+  /* Removed border */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow */
+}
+
+.chat-message {
+  margin-bottom: 0.5rem;
+}
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: transparent; /* Fully transparent */
+  color: #ffffff; /* White text */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle light shadow */
+}
+
+.chat-input input::placeholder {
+  color: #7a2cc5; /* Light purple placeholder text */
+}
+
+.chat-input button {
+  /* Already styled globally in index.css */
+  /* Additional styles if needed */
+}
+
+.chat-input button:hover {
+  background-color: rgba(255, 95, 31, 0.1); /* Subtle Neon Orange tint on hover */
+}
+
+/* Backup Manager */
+.backup-manager {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: transparent; /* Fully transparent */
+  border-radius: 4px;
+  color: #ffffff; /* White text */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow */
+}
+
+.backup-manager h4 {
+  margin-top: 0;
+  color: #39FF14; /* Neon Green for headings */
+}
+
+.backup-manager ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.backup-manager li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  /* Removed border */
+}
+
+.backup-manager li:last-child {
+  /* No border to remove */
+}
+
+.backup-manager button {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  background-color: transparent; /* Fully transparent */
+  color: #ffffff; /* White text */
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.backup-manager button:hover {
+  background-color: rgba(255, 95, 31, 0.1); /* Subtle Neon Orange tint on hover */
+}
+
+.backup-manager button:nth-child(2) {
+  /* No border-color */
+}
+
+.backup-manager button:nth-child(2):hover {
+  background-color: rgba(57, 255, 20, 0.1); /* Subtle Neon Green tint on hover */
+}
+
+/* Notification Styles */
+.notification {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  color: #ffffff; /* White text */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle light shadow */
+}
+
+.notification.error {
+  background-color: rgba(231, 76, 60, 0.9); /* Semi-transparent Red background */
+  /* Removed border */
+}
+
+.notification.success {
+  background-color: rgba(46, 204, 113, 0.9); /* Semi-transparent Green background */
+  /* Removed border */
+}
+// frontend/src/App.tsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './App.css'; // Importing the main CSS
+import BackupManager from './components/BackupManager';
+import Chat from './components/Chat';
+import Notification from './components/Notification';
+import Editor from '@monaco-editor/react';
+import socket, { connectSocket } from './socket'; // Import the socket
+
+function App() {
+  console.log('App.tsx is mounting...');
+
+  // Hard-coded project ID for now
+  const [projectId] = useState('my-website');
+
+  // State variables
+  const [files, setFiles] = useState<string[]>([]);
+  const [selectedFile, setSelectedFile] = useState<string>('');
+  const [fileContent, setFileContent] = useState<string>('');
+  const [chatLog, setChatLog] = useState<string[]>([]);
+  const [chatInput, setChatInput] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
+  const [refreshPreview, setRefreshPreview] = useState<number>(0);
+  const [notifications, setNotifications] = useState<{ message: string; type: 'success' | 'error' }[]>([]);
+
+  // Initialize Socket.IO
+  useEffect(() => {
+    console.log('Connecting Socket.IO client to http://localhost:3001');
+    connectSocket();
+
+    socket.on('metaAction', (metaAction: any) => {
+      console.log('[socket] metaAction event:', metaAction);
+      handleMetaAction(metaAction);
+    });
+
+    socket.on('userUpdate', (update: any) => {
+      console.log('[socket] userUpdate event:', update);
+      handleUserUpdate(update);
+    });
+
+    return () => {
+      console.log('Cleaning up socket in useEffect...');
+      socket.off('metaAction');
+      socket.off('userUpdate');
+      socket.disconnect();
+    };
+  }, [projectId, selectedFile]);
+
+  // Fetch file list on mount
+  useEffect(() => {
+    console.log(`Fetching file list for projectId: ${projectId} from port 3001...`);
+    fetchFileList();
+  }, [projectId]);
+
+  async function fetchFileList() {
+    try {
+      console.log(`GET -> http://localhost:3001/api/${projectId}/files`);
+      const res = await axios.get(`http://localhost:3001/api/${projectId}/files`);
+      setFiles(res.data);
+      setError('');
+      console.log('File list received:', res.data);
+    } catch (err: any) {
+      console.error('Error fetching files (port 3001):', err);
+      setError('Failed to fetch files.');
+    }
+  }
+
+  async function openFile(file: string) {
+    console.log(`openFile called with: ${file}`);
+    setSelectedFile(file);
+
+    try {
+      const res = await axios.get(`http://localhost:3001/api/${projectId}/file`, {
+        params: { filename: file },
+      });
+      setFileContent(res.data.content);
+      setError('');
+      console.log(`File content for ${file}:`, res.data.content);
+    } catch (err: any) {
+      console.error(`Error reading file ${file}:`, err);
+      setError(`Failed to read file ${file}.`);
+    }
+  }
+
+  async function saveFile() {
+    if (!selectedFile) return;
+    console.log(`saveFile called for: ${selectedFile}`);
+    try {
+      await axios.post(`http://localhost:3001/api/${projectId}/file`, {
+        filename: selectedFile,
+        content: fileContent,
+      });
+      setSuccess(`Saved ${selectedFile} successfully.`);
+      setError('');
+      setRefreshPreview(prev => prev + 1);
+      console.log(`File ${selectedFile} saved successfully.`);
+    } catch (err: any) {
+      console.error(`Error saving file ${selectedFile}:`, err);
+      setError(`Failed to save file ${selectedFile}.`);
+      setSuccess('');
+    }
+  }
+
+  async function sendChatMessage() {
+    if (!chatInput.trim()) return;
+    console.log('sendChatMessage called:', chatInput);
+
+    try {
+      setChatLog(prev => [...prev, `You: ${chatInput}`]);
+      const userMessage = chatInput;
+      setChatInput('');
+
+      const res = await axios.post('http://localhost:3001/api/chat', {
+        userMessages: [userMessage],
+        projectId,
+      });
+
+      const gptReply = res.data.reply;
+      setChatLog(prev => [...prev, `GPT: ${gptReply}`]);
+      console.log('GPT reply received:', gptReply);
+
+      setError('');
+      setSuccess('');
+    } catch (err: any) {
+      console.error('Error with GPT chat:', err);
+      setError('Failed to communicate with GPT.');
+    }
+  }
+
+  function handleMetaAction(metaAction: any) {
+    const { action, target, data } = metaAction;
+    switch (action) {
+      case 'refresh_component':
+        if (target === 'fileViewer' && data.filename === selectedFile) {
+          openFile(data.filename);
+        }
+        if (target === 'fileViewer' || target === 'fileList') {
+          fetchFileList();
+        }
+        break;
+      case 'display_notification':
+        const { type, message } = data;
+        setNotifications(prev => [...prev, { type, message }]);
+        break;
+      // Handle other metaAction cases as needed
+      default:
+        console.warn(`Unhandled metaAction: ${action}`);
+    }
+  }
+
+  function handleUserUpdate(update: any) {
+    const { update: updateMessage } = update;
+    setChatLog(prev => [...prev, `Update: ${updateMessage}`]);
+  }
+
+  function getLanguage(filename: string): string {
+    const ext = filename.split('.').pop();
+    switch (ext) {
+      case 'js': return 'javascript';
+      case 'css': return 'css';
+      case 'html': return 'html';
+      default: return 'plaintext';
+    }
+  }
+
+  return (
+    <div className="app-container">
+      {/* LEFT: Sidebar (file list) */}
+      <div className="sidebar">
+        <h2>Files</h2>
+        {error && <Notification message={error} type="error" />}
+        {success && <Notification message={success} type="success" />}
+        <ul>
+          {files.map(file => (
+            <li key={file} onClick={() => openFile(file)} className={file === selectedFile ? 'active-file' : ''}>
+              {file}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* MIDDLE: Live Preview */}
+      <div className="preview-panel">
+        <iframe
+          key={refreshPreview}
+          title="Live Preview"
+          src={`http://localhost:3001/projects/${projectId}/index.html?refresh=${refreshPreview}`}
+          style={{ width: '100%', height: '100%', border: 'none' }}
+        />
+      </div>
+
+      {/* RIGHT: Editor + Chat */}
+      <div className="editor-panel">
+        <div className="editor">
+          <h3>{selectedFile || 'Select a file'}</h3>
+          {selectedFile && (
+            <>
+              <Editor
+                height="300px"
+                language={getLanguage(selectedFile)}
+                value={fileContent}
+                onChange={(value) => setFileContent(value || '')}
+                theme="vs-dark"
+              />
+              <button onClick={saveFile}>Save</button>
+              <BackupManager projectId={projectId} filename={selectedFile} />
+            </>
+          )}
+        </div>
+        <Chat chatLog={chatLog} chatInput={chatInput} setChatInput={setChatInput} sendChatMessage={sendChatMessage} />
+      </div>
+
+      {/* Notifications */}
+      <div className="notifications-container">
+        {notifications.map((notif, index) => (
+          <Notification
+            key={index}
+            message={notif.message}
+            type={notif.type}
+            onClose={() => setNotifications(prev => prev.filter((_, i) => i !== index))}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+/* frontend/src/index.css */
+
+/* 1) Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2) Make sure HTML, Body, and #root fill the whole screen */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+/* 3) Apply the desired gradient background */
+body {
+  font-family: Arial, sans-serif;
+  /* Diagonal gradient from darkest to lightest color */
+  background: linear-gradient(135deg, #05060A 0%, #541B82 100%);
+  color: #ffffff; /* White text for readability */
+}
+
+/* 4) Scrollbar styling for Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px; /* Overall width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(26, 26, 26, 0.9); /* Dark track with slight transparency */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #541B82; /* Lightest color for the thumb */
+  border-radius: 4px;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f0071; /* Slightly darker on hover */
+}
+
+/* 5) Global link styles */
+a {
+  color: #39FF14; /* Neon Green for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 6) Global button styles */
+button {
+  font-family: inherit;
+  transition: background-color 0.3s ease;
+  background-color: transparent; /* Transparent background */
+  color: #ffffff; /* White text */
+  cursor: pointer;
+  border: none; /* Remove borders */
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: rgba(57, 255, 20, 0.1); /* Subtle Neon Green tint on hover */
+}
+
+/* 7) Smooth scrollbar for better UX */
+html {
+  scroll-behavior: smooth;
+}
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css'; // Optional: For any global styles
+import { connectSocket } from './socket'; // Import the connectSocket function
+
+// Establish the Socket.IO connection
+connectSocket();
+
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  // Removed <React.StrictMode> to avoid double mounting in development
+  root.render(
+    // <React.StrictMode>
+      <App />
+    // </React.StrictMode>
+  );
+} else {
+  console.error("Root element not found. Ensure there's a div with id 'root' in your index.html.");
+}
+// frontend/src/socket.ts
+
+import { io, Socket } from 'socket.io-client';
+
+// Initialize the Socket.IO client
+const socket: Socket = io('http://localhost:3001', {
+  autoConnect: false, // Prevents automatic connection upon import
+});
+
+// Function to establish the connection
+export const connectSocket = () => {
+  if (!socket.connected) {
+    socket.connect();
+  }
+};
+
+export default socket;

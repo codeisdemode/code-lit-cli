@@ -1,0 +1,42 @@
+{
+  "name": "code-lit",
+  "version": "1.0.0",
+  "description": "A local dev ops agent inspired by Claude Code",
+  "main": "dist/index.js",
+  "bin": {
+    "code-lit": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeisdemode/code-lit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeisdemode/code-lit/issues"
+  },
+  "homepage": "https://github.com/codeisdemode/code-lit#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.0.0",
+    "glob": "^10.3.3",
+    "inquirer": "^8.2.5",
+    "mongoose": "^8.12.1",
+    "node-fetch": "^3.3.2",
+    "ora": "^5.4.1",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.13.9",
+    "typescript": "^5.8.2"
+  }
+}

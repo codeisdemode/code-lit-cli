@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",              // or "ES2020", "ES2022", etc.
+    "lib": ["ES2017", "DOM"],        // includes modern features like Array.includes
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,            // often used to ignore minor type issues
+    "resolveJsonModule": true,
+    "types": ["node"]                // <--- critical for process, __dirname, etc.
+  },
+  "include": ["server.ts", "middleware/**/*.ts"],
+  "exclude": ["node_modules"]
+}

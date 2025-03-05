@@ -1,0 +1,6 @@
+{
+  "type": "mongodb",
+  "name": "test-db",
+  "host": "localhost",
+  "port": 27017
+}

@@ -1,0 +1,16 @@
+/* frontend/src/components/Notification.css */
+
+.notification {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.notification.error {
+  background-color: #e74c3c;
+}
+
+.notification.success {
+  background-color: #2ecc71;
+}
